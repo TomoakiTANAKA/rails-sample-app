@@ -1,24 +1,52 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usage
+```
+bundle install
+bin/rails s
+```
 
-Things you may want to cover:
+## chapter2
+### railsがinstallできない
+#### エラーメッセージ
 
-* Ruby version
+```
 
-* System dependencies
+```
 
-* Configuration
+#### 原因
+- nokogiriがインストールできない
+  - ディレクトリに権限がない（sierraからの仕様変更）
+  - nokogiriをインストールするモジュールが旧い
+  - xcodeが旧い
 
-* Database creation
+#### 対応
+1. モジュールを入れる（はいらず）
+2. 権限を付与する（実行できず）
+2. xcodeを新しくする（AppStore経由）
 
-* Database initialization
+1. 
+```
+# これができれば良いが、2のためインストールやリンクができない
+brew install libxml2
+brew link --force libxml2
+```
 
-* How to run the test suite
+2. 
+```
+# 例：他に言われたとおりに修正する
+sudo chown -R ${whoami} /usr/opt/opt
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. 
+xcodeを最新に
 
-* Deployment instructions
+### railsがinstallできない（その2）
+```
+# ☓
+rails new .
+# ◯
+bundle exec rails new .
+```
 
-* ...
+理由は、bundleで/vendor/bundleにインストールしたライブラリを参照する必要があるから。
